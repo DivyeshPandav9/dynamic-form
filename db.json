@@ -1,0 +1,101 @@
+{
+  "employees": [
+    {
+      "id": "0cd8",
+      "label": "first name :",
+      "type": "text",
+      "name": "fname",
+      "placeholder": "Enter your first Name",
+      "options": []
+    },
+    {
+      "id": "6bb7",
+      "label": "last name :",
+      "type": "text",
+      "name": "lname",
+      "placeholder": "enter last name",
+      "options": []
+    },
+    {
+      "id": "0a5b",
+      "label": " Email : ",
+      "type": "email",
+      "name": "email",
+      "placeholder": "enter email",
+      "options": []
+    },
+    {
+      "id": "d994",
+      "label": "select your class : ",
+      "type": "select",
+      "name": "class",
+      "placeholder": "choose your class",
+      "options": [
+        {
+          "value": "10",
+          "label": ""
+        },
+        {
+          "value": "12",
+          "label": ""
+        },
+        {
+          "value": "14",
+          "label": ""
+        },
+        {
+          "value": "16",
+          "label": ""
+        }
+      ]
+    },
+    {
+      "id": "7c6d",
+      "label": "dsf",
+      "type": "number",
+      "name": "demo",
+      "placeholder": "ssss",
+      "options": []
+    },
+    {
+      "id": "dee8",
+      "label": "dsf",
+      "type": "number",
+      "name": "pnumber",
+      "placeholder": "phone",
+      "options": []
+    }
+  ],
+  "data": [
+    {
+      "fname": "divyesh",
+      "lname": "pandav",
+      "email": "demo@test.com",
+      "class": "10",
+      "demo": "",
+      "pnumber": "7867867868",
+      "id": "8748"
+    },
+    {
+      "id": "94a9"
+    },
+    {
+      "id": "7f90",
+      "fname": "virta",
+      "lname": "kohli",
+      "email": "virat@test.com",
+      "class": "12",
+      "pnumber": "9876787890",
+      "cityes": "bharuch"
+    },
+    {
+      "id": "7e0e",
+      "fname": "rohit",
+      "lname": "sharma",
+      "email": "rohit@test.com",
+      "class": "14",
+      "pnumber": "9876787894",
+      "cityes": "baroda"
+    }
+  ]
+}

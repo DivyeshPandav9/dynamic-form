@@ -1,0 +1,10 @@
+/* Import Tailwind's base, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.error-message {
+  color: red; /* Red color */
+  font-size: 0.9em; /* Smaller font size */
+  margin-top: 5px; /* Add space above error messages */
+}
