@@ -1,124 +1,119 @@
-import React, { FormEventHandler, useState } from "react";
-import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
-import { AppDispatch } from "../redux/store";
-import { Errors, FieldInput } from "../types/types";
-import { getAllFieldData, postFieldData } from "../redux/slice/formHandler";
-import { useNavigate } from "react-router";
+import React, { FormEventHandler, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
+import { AppDispatch } from '../redux/store'
+import { Errors, FieldInput } from '../types/types'
+import { postFieldData } from '../redux/slice/formHandler'
+import { useNavigate } from 'react-router'
 
 const AddFieldForm = () => {
-  const [errors, setErrors] = useState<Errors>({});
+  const [errors, setErrors] = useState<Errors>({})
   const [newField, setNewField] = useState<FieldInput>({
-    label: "",
-    type: "",
-    name: "",
-    placeholder: "",
-    options: [] as { value: string; label: string; }[],
-    
-  });
+    label: '',
+    type: '',
+    name: '',
+    placeholder: '',
+    options: [] as { value: string; label: string }[],
+  })
 
-  const dispatch: AppDispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch()
+  const navigate = useNavigate()
 
   const validateInput = () => {
-    const newErrors: Errors = {};
+    const newErrors: Errors = {}
 
     if (!newField.label || newField.label.length < 3) {
-      newErrors.label = "Name must be at least 3 characters long.";
+      newErrors.label = 'Name must be at least 3 characters long.'
     }
 
     if (!newField.name || newField.name.length < 2) {
-      newErrors.name = "Age must be a positive integer.";
+      newErrors.name = 'Age must be a positive integer.'
     }
 
     if (!newField.type) {
-      newErrors.type = "Type is required.";
+      newErrors.type = 'Type is required.'
     }
 
     if (!newField.placeholder || newField.placeholder.length < 3) {
-      newErrors.placeholder =
-        "Job title must be at least 3 characters long.";
+      newErrors.placeholder = 'Job title must be at least 3 characters long.'
     }
 
-    setErrors(newErrors);
+    setErrors(newErrors)
     // Return true if there are no errors
-    return Object.keys(newErrors).length === 0;
-  };
+    return Object.keys(newErrors).length === 0
+  }
 
   const showConfirmationDialog = async (title: string) => {
     const result = await Swal.fire({
-      icon: "success",
-      title: title || "Your work has been saved",
+      icon: 'success',
+      title: title || 'Your work has been saved',
       showConfirmButton: true,
-    });
-    return result.isConfirmed;
-  };
+    })
+    return result.isConfirmed
+  }
 
   const handleForm: FormEventHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Validate input before submission
     if (validateInput()) {
-      const confirm = await showConfirmationDialog("Field added successfully");
+      const confirm = await showConfirmationDialog('Field added successfully')
       if (confirm) {
         setNewField({
-          label: "",
-          type: "text",
-          name: "",
-          placeholder: "",
+          label: '',
+          type: 'text',
+          name: '',
+          placeholder: '',
           options: [],
-        });
+        })
 
-        dispatch(postFieldData(newField));
-        dispatch(getAllFieldData());
-        navigate("/dynamic");
+        dispatch(postFieldData(newField))
+
+        navigate('/dynamic')
       }
     }
-  };
+  }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
-    setNewField({ ...newField, [name]: value });
-  };
-  
-  
+    const { name, value } = e.target
+    setNewField({ ...newField, [name]: value })
+  }
+
   const handleOptionsChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const { value } = e.target;
+    const { value } = e.target
     setNewField((prevField) => {
-      const updatedOptions = prevField.options ? [...prevField.options] : [];
-      updatedOptions[index] = { ...updatedOptions[index], value };
-      return { ...prevField, options: updatedOptions };
-    });
-  };
-  
+      const updatedOptions = prevField.options ? [...prevField.options] : []
+      updatedOptions[index] = { ...updatedOptions[index], value }
+      return { ...prevField, options: updatedOptions }
+    })
+  }
 
   const removeOption = (index: number) => {
     setNewField((prevField) => {
-      const updatedOptions = prevField.options ? [...prevField.options] : [];
-      updatedOptions.splice(index, 1);
-      return { ...prevField, options: updatedOptions };
-    });
-  };
-  
+      const updatedOptions = prevField.options ? [...prevField.options] : []
+      updatedOptions.splice(index, 1)
+      return { ...prevField, options: updatedOptions }
+    })
+  }
 
   const addOption = () => {
     setNewField((prevField) => ({
       ...prevField,
-      options: [...(prevField.options || []), { value: "", label: "" }],
-    }));
-  };
-  
+      options: [...(prevField.options || []), { value: '', label: '' }],
+    }))
+  }
+  const goToRemove = () => {
+    navigate('/removeField')
+  }
 
   return (
     <div className="border max-w-md mx-auto p-8 rounded-lg mt-8">
-       <h1 className="text-2xl font-bold mb-4 text-center mt-4">
-          Super Form
-        </h1>
+      <h1 className="text-2xl font-bold mb-4 text-center mt-4">Super Form</h1>
       <form
         onSubmit={handleForm}
         className="max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg"
@@ -170,7 +165,7 @@ const AddFieldForm = () => {
             <div className="text-red-500 text-sm mt-1">{errors.name}</div>
           )}
         </div>
-        {newField.type === "select" && (
+        {newField.type === 'select' && (
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-1">
               Options
@@ -224,9 +219,15 @@ const AddFieldForm = () => {
         >
           Add Field
         </button>
+        <button
+          onClick={goToRemove}
+          className="px-4 py-2 ml-2 bg-red-500 text-white rounded-md focus:outline-none hover:bg-blue-600"
+        >
+          Remove Field
+        </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default AddFieldForm;
+export default AddFieldForm

@@ -1,49 +1,64 @@
 export interface EmpData {
-
-    name: string;
-    age: number | undefined;
-    department: string;
-    job_title: string;
-    salary: number | undefined;
-
+  name: string
+  age: number | undefined
+  department: string
+  job_title: string
+  salary: number | undefined
 }
 
 export interface Todo {
-    id: string;
-    name: string;
-    job_title: string;
-    age: number;
-    salary: number;
-    department: string;
+  id: string
+  name: string
+  job_title: string
+  age: number
+  salary: number
+  department: string
 }
-
 
 export interface Errors {
-    [key: string]: string;
+  [key: string]: string
 }
 
-
+export interface FormErrors {
+  name: string
+  email: string
+  password: string
+}
 export interface ErrorObject {
-    message: string;
+  message: string
+}
+export interface ListItem {
+  id: string
+  // Other properties of your item
 }
 
+export interface AuthData {
+  name: string
+  email: string
+  password: string
+}
+export interface authList {
+  authData: AuthData[]
+  error: ErrorObject
 
+  loading: boolean
+}
 export interface initialStateType {
-    empList: FieldInput[],
-    error: ErrorObject,
-    updateList: EmpData,
-    searchList: Todo[],
-    loading: boolean,
-    currentUser: string | null;
+  empList: FieldInput[]
+  error: ErrorObject
+  updateList: EmpData
+  searchList: Todo[]
+  loading: boolean
+  currentUser: string | null
 }
 export interface initialStateType1 {
-    // dataList:dataListType[],
-    error: string,
-    loading: boolean
+  // dataList:dataListType[],
+  error: string
+  loading: boolean
 }
 
 // export interface dataListType{
-//     [key: string]: string | number; 
+//     [key: string]: string | number;
 //     fname:string,
 //     lname:string,
 //     class:number,
@@ -51,24 +66,24 @@ export interface initialStateType1 {
 //     email:string
 // }
 export interface dataTypes {
-    label: string;
-    placeholder: string | undefined;
-    type: string;
-    required: boolean | undefined;
-    id:string,
-    class:number,
-    email:string,
-    fname:string,
-    lname:string,
-    pnumber:number
+  label: string
+  placeholder: string | undefined
+  type: string
+  required: boolean | undefined
+  id: string
+  class: number
+  email: string
+  fname: string
+  lname: string
+  pnumber: number
 }
 
 export interface FieldInput {
-    label: string;
-    type: string;
-    name: string;
-    placeholder?: string;
-    options?: Array<{ value: string; label: string }>;
-    required?: boolean;
+  id?: string
+  label: string
+  type: string
+  name: string
+  placeholder?: string
+  options?: Array<{ value: string; label: string }>
+  required?: boolean
 }
-

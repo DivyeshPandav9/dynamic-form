@@ -1,45 +1,77 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { } from '../../types/types';
+import { createSlice } from '@reduxjs/toolkit'
+import {} from '../../types/types'
+import { deleteData, getDataList, postData } from './dataHanlder'
 
 const initialState = {
-    dataList: [],
-    error: {
-        message: ''
-    },
+  dataList: [],
+  error: {
+    message: '',
+  },
 
-    loading: false,
-    updateList: []
-};
+  loading: false,
+  updateList: [],
+}
 
 const dataSlice = createSlice({
-    name: 'data',
-    initialState,
-    reducers: {
-
-        getData: (state, action) => {
-            state.loading = false;
-            state.dataList = action.payload;
-        },
-        getError: (state, action) => {
-            state.error = action.payload;
-        },
-        getRequest: (state) => {
-            state.loading = true;
-        },
-        getOneData: (state, action) => {
-            state.updateList = action.payload
-        }
+  name: 'data',
+  initialState,
+  reducers: {
+    getData: (state, action) => {
+      state.loading = false
+      state.dataList = action.payload
     },
-});
+    getError: (state, action) => {
+      state.error = action.payload
+    },
+    getRequest: (state) => {
+      state.loading = true
+    },
+    getOneData: (state, action) => {
+      state.updateList = action.payload
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      //postData api handle
+      .addCase(postData.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(postData.fulfilled, (state, action) => {
+        state.loading = false
+        state.dataList = action.payload
+      })
+      .addCase(postData.rejected, (state, action) => {
+        state.loading = false
+        console.log(action.error)
+      })
 
-export const {
+      //getDataList api handle
+      .addCase(getDataList.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getDataList.fulfilled, (state, action) => {
+        state.loading = false
+        state.dataList = action.payload
+      })
+      .addCase(getDataList.rejected, (state, action) => {
+        state.loading = false
+        console.log(action.payload)
+      })
 
-    getData,
-    getError,
-    getRequest,
-    getOneData
+      //deleteData api handle
+      .addCase(deleteData.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(deleteData.fulfilled, (state) => {
+        state.loading = false
+      })
+      .addCase(deleteData.rejected, (state, action) => {
+        state.loading = false
+        console.log(action.error.message)
+      })
+  },
+})
 
+export const { getData, getError, getRequest, getOneData } = dataSlice.actions
 
-} = dataSlice.actions;
-
-export const dataReducers = dataSlice.reducer;
+export const dataReducers = dataSlice.reducer

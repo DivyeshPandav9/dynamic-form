@@ -1,74 +1,61 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 // import { useNavigate } from "react-router";
 // import Swal from "sweetalert2";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { deleteData, getDataList } from "../redux/dataSlice/dataHanlder";
-import { dataTypes } from "../types/types";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router";
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import { deleteData, getDataList } from '../redux/dataSlice/dataHanlder'
+import { dataTypes } from '../types/types'
+import Swal from 'sweetalert2'
+// import { useNavigate } from "react-router";
 
 const ShowUser = () => {
-  const dispatch = useAppDispatch();
-    const navigate = useNavigate();
+  const dispatch = useAppDispatch()
+  // const navigate = useNavigate();
 
   //   const [isSearching, setIsSearching] = useState(false);
 
-  const data = useAppSelector((state) => state.data.dataList);
+  const data = useAppSelector((state) => state.data.dataList)
 
-  const loading = useAppSelector((state) => state.data.loading);
+  const loading = useAppSelector((state) => state.data.loading)
   // const error = useAppSelector((state) => state.employee.error);
 
-    const showConfirmationDialog = async (title: string, text: string) => {
-      const result = await Swal.fire({
-        title: title || "Are you sure?",
-        text: text || "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      });
+  const showConfirmationDialog = async (title: string, text: string) => {
+    const result = await Swal.fire({
+      title: title || 'Are you sure?',
+      text: text || "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    })
 
-      if (result.isConfirmed) { 
-        await Swal.fire({
-          title: "Deleted!",
-          text: "Employee has been deleted.",
-          icon: "success",
-        });
-      }
-      return result.isConfirmed;
-    };
+    if (result.isConfirmed) {
+      await Swal.fire({
+        title: 'Deleted!',
+        text: 'Employee has been deleted.',
+        icon: 'success',
+      })
+    }
+    return result.isConfirmed
+  }
 
-    const deleteHandle = async (id:string) => {
-      const confirmed = await showConfirmationDialog(
-        'Delete User',
-        'Are you sure you want to delete this user?',
-      );
-      if (confirmed) {
-        dispatch(deleteData(id));
-      }
-    };
-
-    const updateHandle = (id: string) => {
-      navigate(`/update/${id}`);
-    };
-
-    // const handleSearch: React.FormEventHandler<HTMLInputElement> = (
-    //   e: FormEvent<HTMLInputElement>
-    // ) => {
-    //   const query = (e.target as HTMLInputElement).value;
-    //   dispatch(searchEmployee(query));
-    //   setIsSearching(query.length > 0);
-    // };
+  const deleteHandle = async (id: string) => {
+    const confirmed = await showConfirmationDialog(
+      'Delete User',
+      'Are you sure you want to delete this user?'
+    )
+    if (confirmed) {
+      dispatch(deleteData(id))
+    }
+  }
 
   useEffect(() => {
-    dispatch(getDataList());
-  }, [dispatch]);
+    dispatch(getDataList())
+  }, [dispatch])
 
   return (
     <>
-      <p className="form-header">Employee Details</p>
       {
         // error ? (
         //   <h2>{error?.message}</h2>
@@ -86,6 +73,9 @@ const ShowUser = () => {
               placeholder="search employee by name"
             />
           </div> */}
+          <h1 className="text-2xl font-bold mb-4 text-center mt-4">
+            All form Data
+          </h1>
           <div className="item-container p-4">
             <table className="item-table w-full text-left border-collapse">
               <thead>
@@ -120,12 +110,6 @@ const ShowUser = () => {
                         >
                           Delete
                         </button>
-                        <button
-                          className="update-button bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
-                          onClick={() => updateHandle(item.id)}
-                        >
-                          Update
-                        </button>
                       </td>
                     </tr>
                   ))
@@ -142,7 +126,7 @@ const ShowUser = () => {
         </>
       }
     </>
-  );
-};
+  )
+}
 
-export default ShowUser;
+export default ShowUser

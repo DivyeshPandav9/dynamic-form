@@ -1,33 +1,43 @@
-import './App.css';
+import './App.css'
 
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
-} from 'react-router-dom';
-import AddFieldForm from './pages/AddFieldForm';
-import DynamicForm from './pages/DynamicForm';
-import ShowUser from './pages/ShowUser';
-import NavigationBar from './components/NavigationBar';
-import UpdateData from './pages/UpdateData';
+} from 'react-router-dom'
+import AddFieldForm from './pages/AddFieldForm'
+import DynamicForm from './pages/DynamicForm'
+import ShowUser from './pages/ShowUser'
+import NavigationBar from './components/NavigationBar'
+import RemoveField from './pages/RemoveField'
+import Signin from './pages/Signin'
+import Login from './pages/Login'
+import withAuth from './hoc/withAuth'
+
+const ProtectedAddFieldForm = withAuth(AddFieldForm)
+const ProtectedDynamic = withAuth(DynamicForm)
+const ProtectedShowuser = withAuth(ShowUser)
+const ProtectedRemove = withAuth(RemoveField)
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<NavigationBar/>}>
+      <Route element={<NavigationBar />}>
         <Route path="*" element={<h2>404 page not found</h2>} />
-        <Route path="/" element={<AddFieldForm/>} />
-        <Route path="/dynamic" element={<DynamicForm/>} />
-        <Route path="/show" element={<ShowUser/>} />       
-        <Route path="/update/:id" element={<UpdateData/>} />       
-      </Route>,
-    ),
-  );
+        <Route path="/" element={<ProtectedAddFieldForm />} />
+        <Route path="/dynamic" element={<ProtectedDynamic />} />
+        <Route path="/show" element={<ProtectedShowuser />} />
+        <Route path="/removeField" element={<ProtectedRemove />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/login" element={<Login />} />
+      </Route>
+    )
+  )
   return (
     <>
       <RouterProvider router={router} />
     </>
-  );
+  )
 }
-export default App;
+export default App
