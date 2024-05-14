@@ -52,24 +52,14 @@ import { createSlice } from '@reduxjs/toolkit'
 import { initialStateType } from '../../types/types'
 import { postFieldData, getAllFieldData, deleteField } from './formHandler' // Import async thunks
 
-const tokenString = localStorage.getItem('token')
-const currentUser = tokenString ? JSON.parse(tokenString) : null
 
 const initialState: initialStateType = {
   empList: [],
   error: {
     message: '',
   },
-  updateList: {
-    name: '',
-    age: 0,
-    department: '',
-    job_title: '',
-    salary: 0,
-  },
-  searchList: [],
+ 
   loading: false,
-  currentUser: currentUser,
 }
 
 const employeeSlice = createSlice({

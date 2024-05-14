@@ -3,7 +3,6 @@ import Swal from 'sweetalert2'
 
 const NavigationBar = () => {
   const auth = localStorage.getItem('token')
-  console.log(auth)
   const navigate = useNavigate()
 
   const handleLogout = () => {

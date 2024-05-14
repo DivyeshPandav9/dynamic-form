@@ -16,7 +16,6 @@ const RemoveField = () => {
     dispatch(getAllFieldData())
   }, [dispatch])
 
-  console.log(data)
   const navigate = useNavigate()
   const deleteHandle = (id: string) => {
     Swal.fire({

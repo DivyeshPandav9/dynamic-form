@@ -14,6 +14,7 @@ import RemoveField from './pages/RemoveField'
 import Signin from './pages/Signin'
 import Login from './pages/Login'
 import withAuth from './hoc/withAuth'
+import ViewMore from './pages/ViewMore'
 
 const ProtectedAddFieldForm = withAuth(AddFieldForm)
 const ProtectedDynamic = withAuth(DynamicForm)
@@ -31,6 +32,7 @@ function App() {
         <Route path="/removeField" element={<ProtectedRemove />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/login" element={<Login />} />
+        <Route path='/viewmore/:id' element={<ViewMore/>}/>
       </Route>
     )
   )

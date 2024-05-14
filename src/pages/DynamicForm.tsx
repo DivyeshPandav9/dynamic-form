@@ -1,88 +1,60 @@
 import { useEffect, useState } from 'react'
-// import {Todo} from '../types/types'
 import { getAllFieldData } from '../redux/slice/formHandler'
-// import { useNavigate } from 'react-router';
-// import Swal from "sweetalert2";
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { getDataList, postData } from '../redux/dataSlice/dataHanlder'
+import {  postData } from '../redux/dataSlice/dataHanlder'
 import { useNavigate } from 'react-router'
-// import { FieldInput } from "../types/types";
 
 const DynamicForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  // const data1 = useAppSelector((state)=>state.fieldData.empList);
-
-  //   const navigate = useNavigate();
-
-  //   const [isSearching, setIsSearching] = useState(false);
+  
 
   useEffect(() => {
     dispatch(getAllFieldData())
   }, [dispatch])
 
   const data = useAppSelector((state) => state.fieldData.empList)
-  // console.log(data);
-  const [validationMessages, setValidationMessages] = useState<
-    Record<string, string>
-  >({})
+  const [validationMessages, setValidationMessages] = useState<Record<string, string>>({})
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    // Prevent the form from submitting and refreshing the page
     event.preventDefault()
 
-    // Get the form element from the event
     const form = event.currentTarget
 
-    // Create an object to store validation messages
     const newValidationMessages: Record<string, string> = {}
 
     // Iterate through each form field in the form
     Array.from(form.elements).forEach((element) => {
-      // Check if the element is an input or select element
       if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
-        // Cast the element to the appropriate type
         const inputElement = element as HTMLInputElement | HTMLSelectElement
 
-        // Check if the field value is empty
         if (inputElement.value.trim() === '') {
-          // If the field is empty, set a validation message for that field
           newValidationMessages[
             inputElement.name
           ] = `The field "${inputElement.name}" is required.`
-          // Optionally, add a CSS class for visual feedback
           inputElement.classList.add('invalid')
         } else {
-          // If the field is not empty, remove any previous validation message
           newValidationMessages[inputElement.name] = ''
-          // Remove the invalid CSS class if necessary
           inputElement.classList.remove('invalid')
         }
       }
     })
 
-    // Set the new validation messages in the state
     setValidationMessages(newValidationMessages)
-
-    // Check if there are any validation errors
     const hasValidationErrors = Object.values(newValidationMessages).some(
       (message) => message !== ''
     )
 
-    // If there are validation errors, stop form submission and return
     if (hasValidationErrors) {
       return
     }
 
-    // If all fields have values, proceed with form submission
     const formData = new FormData(form)
-    // const formValues: Record<string, string> = {};
     const formValues: Record<string, string> = {}
     formData.forEach((value, key) => {
       formValues[key] = value as string
     })
     console.log('Form submitted successfully:', formValues)
     dispatch(postData(formValues))
-    dispatch(getDataList())
     navigate('/show')
   }
 
@@ -155,6 +127,4 @@ const DynamicForm = () => {
 }
 
 export default DynamicForm
-// function getAllFieldData(): any {
-//   throw new Error("Function not implemented.");
-// }
+

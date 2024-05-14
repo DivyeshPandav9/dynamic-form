@@ -7,29 +7,13 @@ const initialState = {
   error: {
     message: '',
   },
-
   loading: false,
-  updateList: [],
 }
 
 const dataSlice = createSlice({
   name: 'data',
   initialState,
-  reducers: {
-    getData: (state, action) => {
-      state.loading = false
-      state.dataList = action.payload
-    },
-    getError: (state, action) => {
-      state.error = action.payload
-    },
-    getRequest: (state) => {
-      state.loading = true
-    },
-    getOneData: (state, action) => {
-      state.updateList = action.payload
-    },
-  },
+  reducers: {  },
   extraReducers: (builder) => {
     builder
       //postData api handle
@@ -72,6 +56,6 @@ const dataSlice = createSlice({
   },
 })
 
-export const { getData, getError, getRequest, getOneData } = dataSlice.actions
+export default dataSlice.reducer
 
 export const dataReducers = dataSlice.reducer

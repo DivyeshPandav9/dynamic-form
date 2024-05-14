@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { deleteData, getDataList } from '../redux/dataSlice/dataHanlder'
 import { dataTypes } from '../types/types'
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router'
 // import { useNavigate } from "react-router";
 
 const ShowUser = () => {
@@ -49,6 +50,10 @@ const ShowUser = () => {
       dispatch(deleteData(id))
     }
   }
+const navigate = useNavigate()
+  const viewMoreHandle = (id:string)=>{
+    navigate(`/viewmore/${id}`)
+  }
 
   useEffect(() => {
     dispatch(getDataList())
@@ -61,18 +66,7 @@ const ShowUser = () => {
         //   <h2>{error?.message}</h2>
         // ) :
         <>
-          {/* <div className="search-container">
-            <label className="search-label" htmlFor="search">
-              Search{" "}
-            </label>
-            <input
-            //   onChange={handleSearch}
-              className="search-input"
-              id="search"
-              type="text"
-              placeholder="search employee by name"
-            />
-          </div> */}
+         
           <h1 className="text-2xl font-bold mb-4 text-center mt-4">
             All form Data
           </h1>
@@ -82,9 +76,9 @@ const ShowUser = () => {
                 <tr className="bg-gray-200">
                   <th className="px-4 py-2 border text-center">No</th>
                   <th className="px-4 py-2 border text-center">Firstname</th>
-                  <th className="px-4 py-2 border text-center">Lastname</th>
+                  {/* <th className="px-4 py-2 border text-center">Lastname</th> */}
                   <th className="px-4 py-2 border text-center">Number</th>
-                  <th className="px-4 py-2 border text-center">Class</th>
+                  {/* <th className="px-4 py-2 border text-center">Class</th> */}
                   <th className="px-4 py-2 border text-center">Actions</th>
                 </tr>
               </thead>
@@ -100,15 +94,21 @@ const ShowUser = () => {
                     <tr key={item.id} className="border-b">
                       <td className="px-4 py-2 text-center">{index + 1}</td>
                       <td className="px-4 py-2 text-center">{item.fname}</td>
-                      <td className="px-4 py-2 text-center">{item.lname}</td>
+                      {/* <td className="px-4 py-2 text-center">{item.lname}</td> */}
                       <td className="px-4 py-2 text-center">{item.pnumber}</td>
-                      <td className="px-4 py-2 text-center">{item.class}</td>
+                      {/* <td className="px-4 py-2 text-center">{item.class}</td> */}
                       <td className="px-4 py-2 text-center">
                         <button
                           className="delete-button bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded mr-2"
                           onClick={() => deleteHandle(item.id)}
                         >
                           Delete
+                        </button>
+                        <button
+                          className="delete-button bg-blue-500 hover:bg-red-600 text-white py-1 px-2 rounded mr-2"
+                          onClick={() => viewMoreHandle(item.id)}
+                        >
+                          View More
                         </button>
                       </td>
                     </tr>

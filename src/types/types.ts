@@ -46,10 +46,8 @@ export interface authList {
 export interface initialStateType {
   empList: FieldInput[]
   error: ErrorObject
-  updateList: EmpData
-  searchList: Todo[]
   loading: boolean
-  currentUser: string | null
+ 
 }
 export interface initialStateType1 {
   // dataList:dataListType[],
