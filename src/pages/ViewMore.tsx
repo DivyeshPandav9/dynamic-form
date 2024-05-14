@@ -1,4 +1,4 @@
- import { useNavigate, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useAppSelector } from '../redux/hooks'
 
 const ViewMore = () => {
@@ -13,7 +13,6 @@ const ViewMore = () => {
   const newData = data.find(
     (data: { id: string | undefined }) => data.id === id
   ) as unknown as DynamicData
-  //   console.log(newData)
 
   const navigate = useNavigate()
 
@@ -47,7 +46,7 @@ const ViewMore = () => {
                 {key}
               </dt>
               <dd className="mt-1 text-mm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {value as string}
+                {value}
               </dd>
             </div>
           ))}
