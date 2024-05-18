@@ -48,6 +48,14 @@
           "label": ""
         }
       ]
+    },
+    {
+      "id": "40ba",
+      "label": "phone no",
+      "type": "number",
+      "name": "phone",
+      "placeholder": "enter phone number",
+      "options": []
     }
   ],
   "data": [
@@ -90,6 +98,12 @@
       "name": "demo",
       "email": "demo@test.com",
       "password": "$2a$10$8vfqaGYbu/1Vtn7bQ16e1ue2NradleAJodRZXoOf3n8GjF19NNrMC"
+    },
+    {
+      "id": "b07a",
+      "name": "divyesh",
+      "email": "divyesh@test.com",
+      "password": "$2a$10$KX7e1t1aie88L0Lb6cytLuUbV2iycILVDnuodJvTfQRNK5vaA/UTm"
     }
   ]
 }

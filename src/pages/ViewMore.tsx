@@ -14,8 +14,8 @@ const ViewMore = () => {
     (data: { id: string | undefined }) => data.id === id
   ) as unknown as DynamicData
 
+  
   const navigate = useNavigate()
-
   const goBack = () => {
     navigate('/show')
   }
@@ -24,7 +24,6 @@ const ViewMore = () => {
   }
 
   const entries = Object.entries(newData)
-
   return (
     <div>
       <div className="px-4 sm:px-12">
@@ -36,7 +35,7 @@ const ViewMore = () => {
         </p>
       </div>
       <div className="mt-6 border-t border-gray-100 sm:px-12">
-        <dl className="divide-y divide-gray-100">
+     <dl className="divide-y divide-gray-100">
           {entries.map(([key, value], index) => (
             <div
               className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"

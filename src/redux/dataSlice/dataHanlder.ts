@@ -12,15 +12,7 @@ export const postData = createAsyncThunk(
     return response.data
   }
 )
-// export const postFieldData = createAsyncThunk(
-//   'form/postFieldData',
-//   async (empData: FieldInput) => {
-//     const response = await axios.post(apiUrl, empData, {
-//       headers: { 'Content-Type': 'application/json' },
-//     })
-//     return response.data
-//   }
-// )
+
 
 export const getDataList = createAsyncThunk('form/getDataList', async () => {
   const response = await axios.get(apiUrlData)

@@ -55,14 +55,6 @@ export interface initialStateType1 {
   loading: boolean
 }
 
-// export interface dataListType{
-//     [key: string]: string | number;
-//     fname:string,
-//     lname:string,
-//     class:number,
-//     pnumber:number,
-//     email:string
-// }
 export interface dataTypes {
   label: string
   placeholder: string | undefined
