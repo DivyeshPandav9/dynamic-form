@@ -66,7 +66,13 @@ export interface dataTypes {
   fname: string
   lname: string
   pnumber: number
+}// types.ts
+export interface DataItem {
+  id: string
+  fname: string
+  pnumber: string
 }
+
 
 export interface FieldInput {
   id?: string

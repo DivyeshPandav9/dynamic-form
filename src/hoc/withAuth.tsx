@@ -15,7 +15,6 @@ const withAuth: WithAuth = <P extends object>(
     // Check for the auth token in local storage
     const auth = localStorage.getItem('token')
 
-    // If there's no auth token, redirect to the login page
     if (!auth) {
       return <Navigate to="/login" />
     }

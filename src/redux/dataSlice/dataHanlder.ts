@@ -13,20 +13,16 @@ export const postData = createAsyncThunk(
   }
 )
 
-
 export const getDataList = createAsyncThunk('form/getDataList', async () => {
   const response = await axios.get(apiUrlData)
   return response.data
 })
 
-
 export const deleteData = createAsyncThunk(
   'form/deleteData',
   async (id: string, { dispatch }) => {
     await axios.delete(`${apiUrlData}/${id}`)
-   
     dispatch(getDataList())
-    return id 
+    return id
   }
 )
-

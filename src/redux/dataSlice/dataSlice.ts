@@ -20,15 +20,14 @@ const dataSlice = createSlice({
       .addCase(postData.pending, (state) => {
         state.loading = true
       })
-      .addCase(postData.fulfilled, (state, action) => {
+      .addCase(postData.fulfilled, (state) => {
         state.loading = false
-        state.dataList = action.payload
+        // state.dataList = action.payload
       })
       .addCase(postData.rejected, (state, action) => {
         state.loading = false
         console.log(action.error)
       })
-
       //getDataList api handle
       .addCase(getDataList.pending, (state) => {
         state.loading = true

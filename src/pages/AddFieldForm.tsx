@@ -147,6 +147,7 @@ const AddFieldForm = () => {
             <option value="email">Email</option>
             <option value="password">Password</option>
             <option value="select">Select</option>
+            <option value="tel">tel</option>
           </select>
           {errors.type && (
             <div className="text-red-500 text-sm mt-1">{errors.type}</div>
@@ -231,3 +232,4 @@ const AddFieldForm = () => {
 }
 
 export default AddFieldForm
+

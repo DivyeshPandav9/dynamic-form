@@ -50,11 +50,11 @@
       ]
     },
     {
-      "id": "40ba",
-      "label": "phone no",
-      "type": "number",
-      "name": "phone",
-      "placeholder": "enter phone number",
+      "id": "55fa",
+      "label": "first name",
+      "type": "tel",
+      "name": "demo",
+      "placeholder": "ssss",
       "options": []
     }
   ],
