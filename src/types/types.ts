@@ -75,6 +75,7 @@ export interface DataItem {
 
 
 export interface FieldInput {
+  regex: string | number | readonly string[] | undefined
   id?: string
   label: string
   type: string

@@ -14,6 +14,7 @@ const AddFieldForm = () => {
     name: '',
     placeholder: '',
     options: [] as { value: string; label: string }[],
+    regex: '',
   })
 
   const dispatch: AppDispatch = useDispatch()
@@ -23,11 +24,11 @@ const AddFieldForm = () => {
     const newErrors: Errors = {}
 
     if (!newField.label || newField.label.length < 3) {
-      newErrors.label = 'Name must be at least 3 characters long.'
+      newErrors.label = 'Label must be at least 3 characters long.'
     }
 
     if (!newField.name || newField.name.length < 2) {
-      newErrors.name = 'Age must be a positive integer.'
+      newErrors.name = 'Name must be at least 2 characters long.'
     }
 
     if (!newField.type) {
@@ -35,11 +36,10 @@ const AddFieldForm = () => {
     }
 
     if (!newField.placeholder || newField.placeholder.length < 3) {
-      newErrors.placeholder = 'Job title must be at least 3 characters long.'
+      newErrors.placeholder = 'Placeholder must be at least 3 characters long.'
     }
 
     setErrors(newErrors)
-    // Return true if there are no errors
     return Object.keys(newErrors).length === 0
   }
 
@@ -55,19 +55,18 @@ const AddFieldForm = () => {
   const handleForm: FormEventHandler = async (e) => {
     e.preventDefault()
 
-    // Validate input before submission
     if (validateInput()) {
       const confirm = await showConfirmationDialog('Field added successfully')
       if (confirm) {
+        dispatch(postFieldData(newField))
         setNewField({
           label: '',
           type: 'text',
           name: '',
           placeholder: '',
           options: [],
+          regex: '', // Reset regex field
         })
-
-        dispatch(postFieldData(newField))
 
         navigate('/dynamic')
       }
@@ -107,6 +106,7 @@ const AddFieldForm = () => {
       options: [...(prevField.options || []), { value: '', label: '' }],
     }))
   }
+
   const goToRemove = () => {
     navigate('/removeField')
   }
@@ -147,7 +147,7 @@ const AddFieldForm = () => {
             <option value="email">Email</option>
             <option value="password">Password</option>
             <option value="select">Select</option>
-            <option value="tel">tel</option>
+            <option value="tel">Tel</option>
           </select>
           {errors.type && (
             <div className="text-red-500 text-sm mt-1">{errors.type}</div>
@@ -214,6 +214,29 @@ const AddFieldForm = () => {
             </div>
           )}
         </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Regex</label>
+          <select
+            name="regex"
+            value={newField.regex}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+          >
+            <option value="" disabled>
+              Select a regex
+            </option>
+            <option value="\\d+">Digits</option>
+            <option value="[a-zA-Z]+">Alphabets</option>
+            <option value="\\w+">Alphanumeric</option>
+            <option value="^[a-zA-Z0-9]{8,}$">
+              Alphanumeric with min length 8
+            </option>
+            <option value="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$">
+              Email
+            </option>
+            <option value="^[0-9]{10}$">Phone Number (10 digits)</option>
+          </select>
+        </div>
         <button
           type="submit"
           className="px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600"
@@ -222,7 +245,7 @@ const AddFieldForm = () => {
         </button>
         <button
           onClick={goToRemove}
-          className="px-4 py-2 ml-2 bg-red-500 text-white rounded-md focus:outline-none hover:bg-blue-600"
+          className="px-4 py-2 ml-2 bg-red-500 text-white rounded-md focus:outline-none hover:bg-red-600"
         >
           Remove Field
         </button>
@@ -232,4 +255,3 @@ const AddFieldForm = () => {
 }
 
 export default AddFieldForm
-

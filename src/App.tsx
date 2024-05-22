@@ -15,6 +15,7 @@ import Signin from './pages/Signin'
 import Login from './pages/Login'
 import withAuth from './hoc/withAuth'
 import ViewMore from './pages/ViewMore'
+import Cursor from './components/Cursor'
 
 const ProtectedAddFieldForm = withAuth(AddFieldForm)
 const ProtectedDynamic = withAuth(DynamicForm)
@@ -24,6 +25,7 @@ const ProtectedRemove = withAuth(RemoveField)
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
+      
       <Route element={<NavigationBar />}>
         <Route path="*" element={<h2>404 page not found</h2>} />
         <Route path="/" element={<ProtectedAddFieldForm />} />
@@ -38,6 +40,7 @@ function App() {
   )
   return (
     <>
+    <Cursor/>
       <RouterProvider router={router} />
     </>
   )

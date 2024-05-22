@@ -25,32 +25,54 @@ const DynamicForm = () => {
       if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
         const inputElement = element as HTMLInputElement | HTMLSelectElement
         if (inputElement.value.trim() === '') {
-          newValidationMessages[inputElement.name] = `The field "${inputElement.name}" is required.`
+          newValidationMessages[
+            inputElement.name
+          ] = `The field "${inputElement.name}" is required.`
           inputElement.classList.add('invalid')
         } else {
           newValidationMessages[inputElement.name] = ''
           inputElement.classList.remove('invalid')
 
-          // Additional validation for email format
-          if (inputElement.type === 'email') {
-            if (!isValidEmail(inputElement.value.trim())) {
-              newValidationMessages[inputElement.name] = 'Please enter a valid email address.'
+          const fieldData = data.find(
+            (field) => field.name === inputElement.name
+          )
+
+          if (fieldData) {
+            // Validate using custom regex if provided
+            if (
+              fieldData.regex &&
+              typeof fieldData.regex === 'string' && // Check if fieldData.regex is a string
+              !new RegExp(fieldData.regex).test(inputElement.value.trim())
+            ) {
+              newValidationMessages[
+                inputElement.name
+              ] = `The field "${inputElement.name}" is invalid.`
               inputElement.classList.add('invalid')
             }
-          }
 
-          // Additional validation for phone number format
-          if (inputElement.type === 'tel') {
-            if (!isValidPhoneNumber(inputElement.value.trim())) {
-              newValidationMessages[inputElement.name] = 'Please enter a valid phone number.'
+            // Additional validation for specific types
+            if (
+              inputElement.type === 'email' &&
+              !isValidEmail(inputElement.value.trim())
+            ) {
+              newValidationMessages[inputElement.name] =
+                'Please enter a valid email address.'
               inputElement.classList.add('invalid')
             }
-          }
-
-          // Additional validation for password complexity
-          if (inputElement.type === 'password') {
-            if (!isStrongPassword(inputElement.value.trim())) {
-              newValidationMessages[inputElement.name] = 'Password must contain at least 8 characters including uppercase, lowercase, and numeric characters.'
+            if (
+              inputElement.type === 'tel' &&
+              !isValidPhoneNumber(inputElement.value.trim())
+            ) {
+              newValidationMessages[inputElement.name] =
+                'Please enter a valid phone number.'
+              inputElement.classList.add('invalid')
+            }
+            if (
+              inputElement.type === 'password' &&
+              !isStrongPassword(inputElement.value.trim())
+            ) {
+              newValidationMessages[inputElement.name] =
+                'Password must contain at least 8 characters including uppercase, lowercase, and numeric characters.'
               inputElement.classList.add('invalid')
             }
           }
@@ -59,11 +81,12 @@ const DynamicForm = () => {
     })
 
     setValidationMessages(newValidationMessages)
-    const hasValidationErrors = Object.values(newValidationMessages).some((message) => message !== '')
+    const hasValidationErrors = Object.values(newValidationMessages).some(
+      (message) => message !== ''
+    )
 
     if (hasValidationErrors) {
-      // If there are validation errors, do not proceed with form submission
-      return;
+      return
     }
 
     const formData = new FormData(form)
@@ -78,21 +101,18 @@ const DynamicForm = () => {
 
   // Function to validate email format
   const isValidEmail = (email: string): boolean => {
-    // Regular expression for email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return emailRegex.test(email)
   }
 
   // Function to validate phone number format
   const isValidPhoneNumber = (phoneNumber: string): boolean => {
-    // Regular expression for phone number validation (exactly 10 digits)
     const phoneRegex = /^\+?[1-9]\d{9}$/
     return phoneRegex.test(phoneNumber)
   }
 
   // Function to validate password complexity
   const isStrongPassword = (password: string): boolean => {
-    // Regular expression for password complexity
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/
     return passwordRegex.test(password)
   }
@@ -100,12 +120,20 @@ const DynamicForm = () => {
   return (
     <>
       <div className="border max-w-md mx-auto p-8 rounded-lg mt-8">
-        <h1 className="text-2xl font-bold mb-4 text-center mt-4">Dynamic Form</h1>
-        <form className="max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg" onSubmit={handleSubmit}>
+        <h1 className="text-2xl font-bold mb-4 text-center mt-4">
+          Dynamic Form
+        </h1>
+        <form
+          className="max-w-md mx-auto p-4 bg-white shadow-lg rounded-lg"
+          onSubmit={handleSubmit}
+        >
           {data.length > 0 ? (
             data.map((field, index) => (
               <div key={index} className="mb-1 p-1 rounded-md">
-                <label htmlFor={field.name} className="block text-gray-700 font-medium mb-1">
+                <label
+                  htmlFor={field.name}
+                  className="block text-gray-700 font-medium mb-1"
+                >
                   {field.label || field.name}
                 </label>
                 {field.type === 'select' ? (
@@ -136,14 +164,19 @@ const DynamicForm = () => {
                   />
                 )}
                 {validationMessages[field.name] && (
-                  <span className="text-red-600">{validationMessages[field.name]}</span>
+                  <span className="text-red-600">
+                    {validationMessages[field.name]}
+                  </span>
                 )}
               </div>
             ))
           ) : (
             <h3>Reload to show data</h3>
           )}
-          <button type="submit" className="w-full px-3 py-2 bg-blue-500 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-300">
+          <button
+            type="submit"
+            className="w-full px-3 py-2 bg-blue-500 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+          >
             Submit
           </button>
         </form>
@@ -153,5 +186,3 @@ const DynamicForm = () => {
 }
 
 export default DynamicForm
-
-

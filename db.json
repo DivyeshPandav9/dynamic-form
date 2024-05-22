@@ -1,61 +1,40 @@
 {
   "employees": [
     {
-      "id": "0cd8",
-      "label": "first name :",
+      "id": "8532",
+      "label": "first name",
       "type": "text",
       "name": "fname",
-      "placeholder": "Enter your first Name",
-      "options": []
+      "placeholder": "enter first name",
+      "options": [],
+      "regex": "[a-zA-Z]+"
     },
     {
-      "id": "6bb7",
-      "label": "last name :",
+      "id": "ddba",
+      "label": "last name",
       "type": "text",
       "name": "lname",
       "placeholder": "enter last name",
-      "options": []
+      "options": [],
+      "regex": "[a-zA-Z]+"
     },
     {
-      "id": "0a5b",
-      "label": " Phone no : ",
+      "id": "afcf",
+      "label": "email",
+      "type": "email",
+      "name": "email",
+      "placeholder": "enter email",
+      "options": [],
+      "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
+    {
+      "id": "58f0",
+      "label": "phone number",
       "type": "number",
       "name": "pnumber",
       "placeholder": "enter phone number",
-      "options": []
-    },
-    {
-      "id": "d994",
-      "label": "select your class : ",
-      "type": "select",
-      "name": "class",
-      "placeholder": "choose your class",
-      "options": [
-        {
-          "value": "10",
-          "label": ""
-        },
-        {
-          "value": "12",
-          "label": ""
-        },
-        {
-          "value": "14",
-          "label": ""
-        },
-        {
-          "value": "16",
-          "label": ""
-        }
-      ]
-    },
-    {
-      "id": "55fa",
-      "label": "first name",
-      "type": "tel",
-      "name": "demo",
-      "placeholder": "ssss",
-      "options": []
+      "options": [],
+      "regex": "^[0-9]{10}$"
     }
   ],
   "data": [
@@ -78,18 +57,32 @@
       "cityes": "baroda"
     },
     {
-      "id": "871d",
-      "fname": "virat",
-      "lname": "kohli",
-      "pnumber": "98763546278",
-      "class": "14"
+      "id": "bc5a",
+      "fname": "hardik",
+      "lname": "panday",
+      "email": "hardik@test.com",
+      "pnumber": "8956930272"
     },
     {
-      "id": "4ad6",
-      "fname": "divyesh",
-      "lname": "world",
-      "pnumber": "8956787876",
-      "class": "10"
+      "id": "3df2",
+      "fname": "virat",
+      "lname": "kohli",
+      "email": "kohli@test.com",
+      "pnumber": "9876780262"
+    },
+    {
+      "id": "ebfc",
+      "fname": "ishan",
+      "lname": "kishan",
+      "email": "kishan@test.com",
+      "pnumber": "9087658987"
+    },
+    {
+      "id": "d877",
+      "fname": "rahul",
+      "lname": "kl",
+      "email": "rahul@test.com",
+      "pnumber": "9809375644"
     }
   ],
   "users": [
